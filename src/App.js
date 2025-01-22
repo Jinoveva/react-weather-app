@@ -22,7 +22,7 @@ export default function App() {
           </a>{" "}
           and{" "}
           <a
-            href="#"
+            href="https://candid-starburst-e7b46f.netlify.app/"
             target="_blank" rel="noreferrer noopener"
           >
             hosted on Netlify
