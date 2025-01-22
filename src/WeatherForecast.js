@@ -7,13 +7,25 @@ export default function WeatherForecast({ coordinates }) {
   const [forecast, setForecast] = useState(null);
 
   useEffect(() => {
-    const apiKey = "1a6432c5ca7b6f9b0bee45c98d54ea71";
-    const apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
-    axios.get(apiUrl).then((response) => setForecast(response.data.daily));
-  }, [coordinates]);
+    if (!coordinates) return;
+
+    const apiKey = "ft01o336fa01b0d041f3cbcd1c5dc250"; 
+    const apiUrl = `https://api.shecodes.io/weather/v1/forecast?lat=${coordinates.lat}&lon=${coordinates.lon}&key=${apiKey}&units=metric`; // Updated API URL
+
+    // Fetch forecast data
+    axios
+      .get(apiUrl)
+      .then((response) => {
+        console.log("API Response:", response.data);  // Log the response to check the data
+        setForecast(response.data.daily); // Assuming the 'daily' data is returned
+      })
+      .catch((error) => {
+        console.error("Error fetching forecast data:", error);
+      });
+  }, [coordinates]); // Re-fetch when coordinates change
 
   if (!forecast) {
-    return null;
+    return <div>Loading forecast...</div>; // Show loading message while fetching forecast
   }
 
   return (

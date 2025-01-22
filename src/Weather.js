@@ -1,46 +1,57 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import WeatherInfo from "./WeatherInfo";
 import WeatherForecast from "./WeatherForecast";
 import axios from "axios";
 import "./Weather.css";
 
-export default function Weather({ defaultCity }) {
-  const [weatherData, setWeatherData] = useState(null);
-  const [city, setCity] = useState(defaultCity);
+export default function Weather(props) {
+  const [weatherData, setWeatherData] = useState({ ready: false });
+  const [city, setCity] = useState(props.defaultCity);
 
-  useEffect(() => {
-    searchCity(city); // Fetch weather data for the default city on mount
-  }, [city]);
-
+  // Function to handle the API response
   function handleResponse(response) {
-    const { coord, main, weather, wind, name, dt } = response.data;
-    setWeatherData({
-      coordinates: coord,
-      temperature: main.temp,
-      humidity: main.humidity,
-      date: new Date(dt * 1000),
-      description: weather[0].description,
-      icon: weather[0].icon,
-      wind: wind.speed,
-      city: name,
-    });
-  }
+  const data = response.data;
+  console.log("API Response:", data); 
+  setWeatherData({
+    ready: true,
+    coordinates: data.coordinates,  
+    temperature: data.temperature.current,
+    humidity: data.temperature.humidity,
+    date: new Date(data.time * 1000),
+    description: data.condition.description,
+    icon: data.condition.icon,
+    wind: data.wind.speed,
+    city: data.city,
+  });
+}
 
+
+  // Function to handle form submit
   function handleSubmit(event) {
     event.preventDefault();
-    searchCity(city);
+    search();
   }
 
-  function searchCity(cityName) {
-    const apiKey = "1a6432c5ca7b6f9b0bee45c98d54ea71";
-    const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}&units=metric`;
-    axios.get(apiUrl).then(handleResponse);
+  // Function to handle city change input
+  function handleCityChange(event) {
+    setCity(event.target.value);
   }
 
-  if (!weatherData) {
-    return "Loading...";
+  // Function to fetch weather data from the SheCodes API
+  function search() {
+    const apiKey = "ft01o336fa01b0d041f3cbcd1c5dc250";  // Your SheCodes API key
+    const apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}`; // SheCodes API URL
+    
+    // Make the Axios GET request
+    axios
+      .get(apiUrl)
+      .then(handleResponse)
+      .catch((error) => {
+        console.error("Error fetching weather data:", error);
+      });
   }
 
+ if (weatherData.ready) {
   return (
     <div className="Weather">
       <form onSubmit={handleSubmit}>
@@ -50,17 +61,26 @@ export default function Weather({ defaultCity }) {
               type="search"
               placeholder="Enter a city.."
               className="form-control"
-              autoFocus
-              onChange={(e) => setCity(e.target.value)}
+              autoFocus="on"
+              onChange={handleCityChange}
             />
           </div>
           <div className="col-3">
-            <input type="submit" value="Search" className="btn btn-primary w-100" />
+            <input
+              type="submit"
+              value="Search"
+              className="btn btn-primary w-100"
+            />
           </div>
         </div>
       </form>
       <WeatherInfo data={weatherData} />
-      <WeatherForecast coordinates={weatherData.coordinates} />
+      {weatherData.coordinates && <WeatherForecast coordinates={weatherData.coordinates} />}
     </div>
   );
+} else {
+  search();  // Call the search function to load data when the component first loads
+  return "Loading...";
+}
+
 }
