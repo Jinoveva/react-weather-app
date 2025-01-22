@@ -15,7 +15,7 @@ export default function App() {
           </a>{" "}
           and is{" "}
           <a
-            href=""
+            href="https://github.com/Jinoveva/react-weather-app"
             target="_blank"
           >
             open-sourced on GitHub
