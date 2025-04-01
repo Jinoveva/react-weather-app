@@ -1,5 +1,85 @@
 .App {
-  font-family: sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
+  padding: 10%;
+  background-color: #f6f0f0;
+}
+
+.container {
+  width: 60% !important;
+  padding: 5%;
+  display: block;
+  margin: 0 auto;
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 8px;
+}
+
+#search-input {
+  width: 70%;
+  background-color: #f6f0f0;
+  border: none;
+  padding: 2% 1%;
+  border-radius: 8px;
+  margin-right: 3%;
+}
+
+#submit-input {
+  width: 25%;
+  padding: 2% 1%;
+  border: none;
+  border-radius: 8px;
+  background-color: #c599b6;
+  color: white;
+}
+
+form, .weather-summary{
+  padding: 0 4% 2% 4%;
+}
+
+#hr-line {
+  width: 95% !important;
+  display: block;
+  margin: 0 auto;
+  opacity: 0.04 !important;
+  margin-top: 5%;
+}
+
+h1 {
+  color: #574964 !important;
+  font-weight: bold !important;
+  font-size: 40px !important;
+}
+
+.weather-box{
+  margin: 5% 5% 0 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.weather-info{
+  color: #BE3144;
+}
+
+.temp-number{
+  font-size: 60px !important;
+  font-weight: bold !important;
+}
+
+.degrees-celcius{
+  position: relative;
+  bottom: 30px;
+  font-size: 25px !important;
+}
+
+#last-hr{
+  width: 95% !important;
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 5%;
+  opacity: 0.03 !important;
+}
+
+footer{
+  font-size: 14px ;
   text-align: center;
-  padding: 20px;
 }
