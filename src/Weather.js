@@ -1,11 +1,13 @@
-import "./App.css";
+import "./Weather.css";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import React, { useState } from "react";
 import ReactAnimatedWeather from "react-animated-weather";
+import WeatherInfo from "./WeatherInfo";
 
-export default function App() {
+export default function Weather(props) {
   const [weatherData, setWeatherdata] = useState({ ready: false });
+  const [city, setCity] = useState(props.defaultCity);
 
   function handleResponse(response) {
     console.log(response.data);
@@ -19,40 +21,35 @@ export default function App() {
     });
   }
 
+  function handleSubmit(event) {
+    event.preventDefault();
+    search();
+  }
+
+  function handleCityChange(event) {
+    setCity(event.target.value);
+  }
+
+  function search() {
+    const apiKey = "f3887e262c88d1158f7e2ef4998e234c";
+    const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+    axios.get(apiUrl).then(handleResponse);
+  }
+
   if (weatherData.ready) {
     return (
-      <div className="App">
+      <div className="Weather">
         <div className="container">
-          <form>
+          <form onSubmit={handleSubmit}>
             <input
               id="search-input"
               type="search"
               placeholder="Enter a city..."
+              onChange={handleCityChange}
             ></input>
             <input id="submit-input" type="submit" value="Search"></input>
           </form>
-          <hr id="hr-line"></hr>
-          <div className="weather-box">
-            <div className="weather-summary">
-              <h1>{weatherData.city}</h1>
-              <p>
-                Day Ti:me,{" "}
-                <span className="text-capitalize">
-                  {weatherData.description}
-                </span>
-                <br />
-                Humidity:{" "}
-                <span className="weather-info">{weatherData.humidity}%</span>
-                Wind:{" "}
-                <span className="weather-info">{weatherData.wind}km/h</span>
-              </p>
-            </div>
-            <div classname="weather-temp">
-              <span className="temp-number">☁️{weatherData.temperature}</span>
-              <span className="degrees-celcius">°C</span>
-            </div>
-          </div>
-          <hr id="last-hr"></hr>
+          <WeatherInfo data={weatherData} />
           <footer>
             <p>
               This project was coded by {""}
@@ -86,11 +83,7 @@ export default function App() {
       </div>
     );
   } else {
-    const apiKey = "f3887e262c88d1158f7e2ef4998e234c";
-    const city = "Johannesburg";
-    const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
-    axios.get(apiUrl).then(handleResponse);
-
+    search();
     return "Loading...";
   }
 }
