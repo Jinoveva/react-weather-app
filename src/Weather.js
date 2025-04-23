@@ -1,13 +1,14 @@
 import "./Weather.css";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ReactAnimatedWeather from "react-animated-weather";
 import WeatherInfo from "./WeatherInfo";
 
 export default function Weather(props) {
   const [weatherData, setWeatherdata] = useState({ ready: false });
-  const [city, setCity] = useState(props.defaultCity);
+  const [city, setCity] = useState(props.defaultCity); // ✅ FIXED: Ensure defaultCity is passed in index.js
+
 
   function handleResponse(response) {
     console.log(response.data);
@@ -18,6 +19,7 @@ export default function Weather(props) {
       humidity: Math.round(response.data.main.humidity),
       wind: Math.round(response.data.wind.speed),
       city: response.data.name,
+      date: new Date(), // @Jinoveva ✅ ADDED: Needed for FormattedDate
     });
   }
 
@@ -35,6 +37,11 @@ export default function Weather(props) {
     const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
     axios.get(apiUrl).then(handleResponse);
   }
+
+  // ✅ FIXED: @Jinoveva Prevent infinite loop by using useEffect instead of calling search() directly in render
+  useEffect(() => {
+    search();
+  }, []);
 
   if (weatherData.ready) {
     return (

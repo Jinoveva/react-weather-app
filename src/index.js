@@ -6,9 +6,11 @@ import reportWebVitals from "./reportWebVitals";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
+// ✅ FIXED: @Jinoveva Added defaultCity to prevent "undefined" API calls
 root.render(
   <React.StrictMode>
-    <Weather />
+   
+   <Weather defaultCity="Cape Town" />
   </React.StrictMode>
 );
 
