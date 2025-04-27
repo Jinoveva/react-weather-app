@@ -18,7 +18,7 @@ export default function WeatherInfo(props) {
           </p>
         </div>
         <div className="weather-temp">
-          <span className="temp-number">🌡{props.data.temperature}</span>
+          <span className="temp-number">☁️{props.data.temperature}</span>
           <span className="degrees-celcius">°C</span>
         </div>
       </div>

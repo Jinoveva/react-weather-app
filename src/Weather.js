@@ -15,8 +15,8 @@ export default function Weather(props) {
       setWeatherData({
         ready: true,
         temperature: Math.round(response.data.main.temp),
-        date: new Date(response.data.dt * 1000), // OpenWeatherMap gives `dt` as a UNIX timestamp
         description: response.data.weather[0].description,
+        date: new Date(response.data.dt * 1000), // OpenWeatherMap gives `dt` as a UNIX timestamp
         humidity: Math.round(response.data.main.humidity),
         wind: Math.round(response.data.wind.speed),
         city: response.data.name,
