@@ -19,6 +19,7 @@ export default function Weather(props) {
         date: new Date(response.data.dt * 1000), // OpenWeatherMap gives `dt` as a UNIX timestamp
         humidity: Math.round(response.data.main.humidity),
         wind: Math.round(response.data.wind.speed),
+        icon: response.data.weather[0].icon,
         city: response.data.name,
       });
       setErrorMessage(""); // Clear error message if data is successfully fetched
