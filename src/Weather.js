@@ -39,7 +39,7 @@ export default function Weather(props) {
   }
 
   function search() {
-    const apiKey = "f3887e262c88d1158f7e2ef4998e234c";
+    const apiKey = "f3887e262c88d1158f7e2ef4998e234c"; // Hardcoded API key
     const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
 
     // Debugging: Check if the API URL is correct
@@ -58,6 +58,7 @@ export default function Weather(props) {
     search(); // Call search on component mount
   }, []);
 
+  // Return should be inside the functional component's body
   if (!weatherData.ready) {
     return (
       <div className="Weather">
@@ -78,6 +79,7 @@ export default function Weather(props) {
     );
   }
 
+  // Return the main weather data UI
   return (
     <div className="Weather">
       <div className="container">
