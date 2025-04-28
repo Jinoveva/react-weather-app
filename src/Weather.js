@@ -3,6 +3,7 @@ import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import React, { useState, useEffect } from "react";
 import WeatherInfo from "./WeatherInfo";
+import WeatherForecast from "./WeatherForecast";
 
 export default function Weather(props) {
   const [weatherData, setWeatherData] = useState({ ready: false });
@@ -93,6 +94,7 @@ export default function Weather(props) {
           <input id="submit-input" type="submit" value="Search" />
         </form>
         <WeatherInfo data={weatherData} />
+        <WeatherForecast />
         <footer>
           <p>
             This project was coded by{" "}
