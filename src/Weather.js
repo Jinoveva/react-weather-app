@@ -15,6 +15,7 @@ export default function Weather(props) {
     if (response.data.cod === 200) {
       setWeatherData({
         ready: true,
+        coordinates: response.data.coord,
         temperature: Math.round(response.data.main.temp),
         description: response.data.weather[0].description,
         date: new Date(response.data.dt * 1000), // OpenWeatherMap gives `dt` as a UNIX timestamp
@@ -94,7 +95,7 @@ export default function Weather(props) {
           <input id="submit-input" type="submit" value="Search" />
         </form>
         <WeatherInfo data={weatherData} />
-        <WeatherForecast />
+        <WeatherForecast coordinates={weatherData.coord} />
         <footer>
           <p>
             This project was coded by{" "}
