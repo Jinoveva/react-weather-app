@@ -41,8 +41,8 @@ export default function Weather(props) {
   }
 
   function search() {
-    const apiKey = "f3887e262c88d1158f7e2ef4998e234c"; // Hardcoded API key
-    const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+  let apiKey = "ft01o336fa01b0d041f3cbcd1c5dc250";
+    const apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key={apiKey}`;
 
     // Debugging: Check if the API URL is correct
     console.log("API URL:", apiUrl);
