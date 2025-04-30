@@ -18,9 +18,9 @@ export default function WeatherForecast(props) {
 
   function load() {
     let apiKey = "ft01o336fa01b0d041f3cbcd1c5dc250";
-    let longitude = props.coordinates.lon;
-    let latitude = props.coordinates.lat;
-let apiUrl = `https://api.shecodes.io/weather/v1/forecast?lat=${latitude}&lon=${longitude}&key=${apiKey}`;
+    let longitude = props.coordinates.longitude;
+    let latitude = props.coordinates.latitude;
+    let apiUrl = `https://api.shecodes.io/weather/v1/forecast?lat=${latitude}&lon=${longitude}&key=${apiKey}`;
 
     axios.get(apiUrl).then(handleResponse);
   }
@@ -49,7 +49,4 @@ let apiUrl = `https://api.shecodes.io/weather/v1/forecast?lat=${latitude}&lon=${
     return null;
   }
 }
-    //let apiKey = "ft01o336fa01b0d041f3cbcd1c5dc250";
-
-    //let apiUrl = `https://api.shecodes.io/weather/v1/forecast?lat=${latitude}&lon=${longitude}&key=${apiKey}`;
 

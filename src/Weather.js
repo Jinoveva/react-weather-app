@@ -12,17 +12,17 @@ export default function Weather(props) {
 
   function handleResponse(response) {
     console.log("API Response:", response.data); // Debug API response
-    if (response.data.cod === 200) {
+    if (response.data.city) {
       setWeatherData({
         ready: true,
-        coordinates: response.data.coord,
-        temperature: Math.round(response.data.main.temp),
-        description: response.data.weather[0].description,
-        date: new Date(response.data.dt * 1000), // OpenWeatherMap gives `dt` as a UNIX timestamp
-        humidity: Math.round(response.data.main.humidity),
+        coordinates: response.data.coordinates,
+        temperature: Math.round(response.data.temperature.current),
+        description: response.data.condition.description,
+        date: new Date(response.data.time * 1000), // OpenWeatherMap gives `dt` as a UNIX timestamp
+        humidity: Math.round(response.data.temperature.humidity),
         wind: Math.round(response.data.wind.speed),
-        icon: response.data.weather[0].icon,
-        city: response.data.name,
+        icon: response.data.condition.icon,
+        city: response.data.city,
       });
       setErrorMessage(""); // Clear error message if data is successfully fetched
     } else {
@@ -42,7 +42,7 @@ export default function Weather(props) {
 
   function search() {
     const apiKey = "ft01o336fa01b0d041f3cbcd1c5dc250"; // Hardcoded API key
-    const apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key={apiKey}`;
+    const apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}`;
 
     // Debugging: Check if the API URL is correct
     console.log("API URL:", apiUrl);

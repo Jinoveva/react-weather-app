@@ -32,7 +32,8 @@
   color: white;
 }
 
-form, .weather-summary{
+form,
+.weather-summary {
   padding: 0 4% 2% 4%;
 }
 
@@ -50,28 +51,28 @@ h1 {
   font-size: 40px !important;
 }
 
-.weather-box{
+.weather-box {
   margin: 5% 5% 0 0;
   display: flex;
   justify-content: space-between;
 }
 
-.weather-info{
-  color: #BE3144;
+.weather-info {
+  color: #be3144;
 }
 
-.temp-number{
+.temp-number {
   font-size: 60px !important;
   font-weight: bold !important;
 }
 
-.degrees-celcius{
+.degrees-celcius {
   position: relative;
   bottom: 30px;
   font-size: 25px !important;
 }
 
-#last-hr{
+#last-hr {
   width: 95% !important;
   display: block;
   margin: 0 auto;
@@ -79,7 +80,7 @@ h1 {
   opacity: 0.03 !important;
 }
 
-footer{
-  font-size: 14px ;
+footer {
+  font-size: 14px;
   text-align: center;
 }
