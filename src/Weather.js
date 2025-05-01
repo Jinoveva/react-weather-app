@@ -106,7 +106,7 @@ export default function Weather(props) {
             </a>{" "}
             and hosted on{" "}
             <a
-              href="https://jinovevas-react-weather-app.netlify.app/"
+              href="https://jinos-react-weather-app.netlify.app/"
               target="_blank"
               rel="noreferrer"
             >
